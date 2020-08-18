@@ -1,0 +1,22 @@
+version: '3'
+
+services:
+  web:
+    build: .
+    image: mi-xampp:1.0
+    ports:
+      - "80:80"
+    volumes:
+      - .:/var/www/html
+
+  db:
+    image: mysql:5.7
+    environment:
+      MYSQL_DATABASE: xampp
+      MYSQL_ROOT_PASSWORD: hello1234
+    volumes:
+      - xampp-data:/var/lib/mysql
+
+volumes:
+  xampp-data:
+    driver: local

@@ -1,0 +1,29 @@
+version: '3'
+
+services:
+  web:
+    build: .
+    image: python-web:1.0
+    ports:
+      - "5000:5000"
+    volumes:
+      - .:/app
+    environment:
+      DB_USER: postgres
+      DB_PASS: hello1234
+      DB_HOST: db
+      DB_PORT: 5432
+      DB_NAME: postgres
+
+  db:
+    image: postgres
+    environment:
+      POSTGRES_PASSWORD: hello1234
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
+
+volumes:
+  postgres-data:
+    driver: local
+
+

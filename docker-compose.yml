@@ -1,0 +1,24 @@
+version: "3"
+
+services:
+  web:
+    build: .
+    image: hola-docker-2:1.0
+    ports:
+      - 5000:5000
+    environment:
+      MSG: ${MSG_CONTENEDOR}
+    volumes:
+      - .:/app
+
+  db:
+    image: postgres
+    restart: always
+    environment:
+      POSTGRES_PASSWORD: ${DB_PASS}
+    volumes:
+      - data:/var/lib/postgresql/data
+
+volumes:
+  data:
+    driver: local
